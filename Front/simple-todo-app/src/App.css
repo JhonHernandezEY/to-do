@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.add-todo-container {
+  margin-bottom: 20px;
+  display: flex; /* Ensure items are aligned in a row */
+  align-items: center; /* Center items vertically */
+}
+
+.add-todo-input {
+  width: 200px;
+  margin-right: 20px; /* Space between textbox and button */
+}
+
+.add-todo-button {
+  margin-left: 10px; /* Add space between TextField and PrimaryButton */
+}
+
+.search-container {
+  margin-bottom: 20px;
+  display: flex; /* Ensure items are aligned in a row */
+  align-items: center; /* Center items vertically */
+}
+
+.search-input {  
+  width: 200px; 
+  margin-right: 20px; /* Space between textbox and button */
+}

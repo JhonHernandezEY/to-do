@@ -1,30 +1,31 @@
-// src/components/AddTodo.js
 import React, { useState } from 'react';
 import { TextField, PrimaryButton } from '@fluentui/react';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../features/todoSlice';
+import { addTodo } from '../features/todoSlice'; 
+import '../App.css'; 
 
 const AddTodo = () => {
-  const [inputValue, setInputValue] = useState('');
-  const dispatch = useDispatch();
+    const [inputValue, setInputValue] = useState('');
+    const dispatch = useDispatch();
 
-  const handleAddTodo = () => {
-    if (inputValue) {
-      dispatch(addTodo(inputValue));
-      setInputValue('');
-    }
-  };
+    const handleAddTodo = () => {
+        if (inputValue) {
+            dispatch(addTodo(inputValue));
+            setInputValue('');
+        }
+    };
 
-  return (
-    <div>
-      <TextField
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Add a new task"
-      />
-      <PrimaryButton onClick={handleAddTodo}>Add</PrimaryButton>
-    </div>
-  );
+    return (
+        <div className="add-todo-container">
+            <TextField
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Add a new task"
+                className="add-todo-input"
+            />
+            <PrimaryButton onClick={handleAddTodo}>Add</PrimaryButton>
+        </div>
+    );
 };
 
 export default AddTodo;
