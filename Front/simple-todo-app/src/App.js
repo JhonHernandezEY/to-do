@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+// src/App.js
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, PrimaryButton, List, IColumn } from '@fluentui/react';
-import { addTodo, toggleTodo, deleteTodo } from './features/todoSlice';
+import { TextField, PrimaryButton, DetailsList, DetailsListLayoutMode } from '@fluentui/react';
+import { addTodo, deleteTodo } from './features/todoSlice';
 
 const App = () => {
   const [inputValue, setInputValue] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredTodos, setFilteredTodos] = useState([]);
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+
+  // Effect to refresh the filteredTodos whenever todos or searchTerm changes
+  useEffect(() => {
+    if (searchTerm) {
+      const results = todos.filter(todo =>
+        todo.text.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredTodos(results);
+    } else {
+      setFilteredTodos(todos);
+    }
+  }, [todos, searchTerm]);
 
   const handleAddTodo = () => {
     if (inputValue) {
@@ -15,13 +30,35 @@ const App = () => {
     }
   };
 
-  const handleToggleTodo = (index) => {
-    dispatch(toggleTodo(index));
-  };
-
   const handleDeleteTodo = (index) => {
     dispatch(deleteTodo(index));
   };
+
+  const columns = [
+    {
+      key: 'column1',
+      name: 'Task',
+      fieldName: 'text',
+      minWidth: 200,
+      maxWidth: 300,
+      isMultiline: true,
+      onRender: (item) => (
+        <span>
+          {item.text}
+        </span>
+      ),
+    },
+    {
+      key: 'column2',
+      name: 'Actions',
+      fieldName: 'actions',
+      minWidth: 100,
+      maxWidth: 100,
+      onRender: (item, index) => (
+        <PrimaryButton onClick={() => handleDeleteTodo(index)}>Delete</PrimaryButton>
+      ),
+    },
+  ];
 
   return (
     <div style={{ padding: '20px' }}>
@@ -32,23 +69,22 @@ const App = () => {
         placeholder="Add a new task"
       />
       <PrimaryButton onClick={handleAddTodo}>Add</PrimaryButton>
-      <List
-        items={todos}
-        onRenderCell={(item, index) => (
-          <div style={{ display: 'flex', justifyContent: 'space-between', margin: '5px 0' }}>
-            <span
-              style={{ textDecoration: item.completed ? 'line-through' : 'none', cursor: 'pointer' }}
-              onClick={() => handleToggleTodo(index)}
-            >
-              {item.text}
-            </span>
-            <PrimaryButton onClick={() => handleDeleteTodo(index)}>Delete</PrimaryButton>
-          </div>
-        )}
+      <TextField
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search tasks"
+        style={{ marginTop: '20px' }}
+      />
+      <PrimaryButton onClick={() => setSearchTerm(searchTerm)} style={{ marginLeft: '10px' }}>Search</PrimaryButton>
+      <DetailsList
+        items={filteredTodos} // Always show filtered todos
+        columns={columns}
+        setKey="set"
+        layoutMode={DetailsListLayoutMode.fixedColumns}
+        isHeaderVisible={true}
       />
     </div>
   );
 };
 
 export default App;
-
