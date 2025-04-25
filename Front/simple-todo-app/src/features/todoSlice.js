@@ -1,8 +1,14 @@
+// features/todoSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const todoSlice = createSlice({
   name: 'todos',
-  initialState: [],
+  initialState: [
+    { text: 'Buy groceries', completed: false },
+    { text: 'Walk the dog', completed: false },
+    { text: 'Read a book', completed: false },
+    { text: 'Finish project', completed: false },
+  ],
   reducers: {
     addTodo: (state, action) => {
       state.push({ text: action.payload, completed: false });

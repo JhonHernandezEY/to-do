@@ -1,15 +1,15 @@
-// src/App.js
-import React, { useState, useEffect } from 'react';
+// src/components/App.js
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, PrimaryButton, DetailsList, DetailsListLayoutMode } from '@fluentui/react';
-import { addTodo, deleteTodo } from './features/todoSlice';
+import { deleteTodo } from './features/todoSlice';
+import AddTodo from './components/AddTodo';
 
 const App = () => {
-  const [inputValue, setInputValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredTodos, setFilteredTodos] = useState([]);
   const todos = useSelector((state) => state.todos);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // Get the dispatch function
 
   // Effect to refresh the filteredTodos whenever todos or searchTerm changes
   useEffect(() => {
@@ -23,15 +23,8 @@ const App = () => {
     }
   }, [todos, searchTerm]);
 
-  const handleAddTodo = () => {
-    if (inputValue) {
-      dispatch(addTodo(inputValue));
-      setInputValue('');
-    }
-  };
-
   const handleDeleteTodo = (index) => {
-    dispatch(deleteTodo(index));
+    dispatch(deleteTodo(index)); // Now dispatch is defined
   };
 
   const columns = [
@@ -63,12 +56,7 @@ const App = () => {
   return (
     <div style={{ padding: '20px' }}>
       <h1>Simple To-Do App</h1>
-      <TextField
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Add a new task"
-      />
-      <PrimaryButton onClick={handleAddTodo}>Add</PrimaryButton>
+      <AddTodo />
       <TextField
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
