@@ -1,27 +1,50 @@
-// features/todoSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const todoSlice = createSlice({
-  name: 'todos',
-  initialState: [
-    { text: 'Buy groceries', completed: false },
-    { text: 'Walk the dog', completed: false },
-    { text: 'Read a book', completed: false },
-    { text: 'Finish project', completed: false },
-  ],
-  reducers: {
-    addTodo: (state, action) => {
-      state.push({ text: action.payload, completed: false });
-    },
-    toggleTodo: (state, action) => {
-      const todo = state[action.payload];
-      todo.completed = !todo.completed;
-    },
-    deleteTodo: (state, action) => {
-      return state.filter((_, index) => index !== action.payload);
-    },
-  },
+const API_URL = 'https://jsonplaceholder.typicode.com/todos'; // New: Define the API URL
+
+export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
+    const response = await axios.get(API_URL);
+    return response.data.slice(0, 10); // Limit to 10 items for simplicity
 });
 
-export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
+export const addTodoAsync = createAsyncThunk('todos/addTodo', async (todoText) => {
+    const response = await axios.post(API_URL, {
+        title: todoText,
+        completed: false,
+    });
+    return response.data; 
+});
+
+export const deleteTodoAsync = createAsyncThunk('todos/deleteTodo', async (id) => {
+    await axios.delete(`${API_URL}/${id}`);
+    return id; 
+});
+
+const todoSlice = createSlice({
+    name: 'todos',
+    initialState: [],
+    reducers: {
+        toggleTodo: (state, action) => {
+            const todo = state.find((todo) => todo.id === action.payload);
+            if (todo) {
+                todo.completed = !todo.completed;
+            }
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchTodos.fulfilled, (state, action) => {
+                return action.payload; 
+            })
+            .addCase(addTodoAsync.fulfilled, (state, action) => {
+                state.push(action.payload); 
+            })
+            .addCase(deleteTodoAsync.fulfilled, (state, action) => {
+                return state.filter((todo) => todo.id !== action.payload); 
+            });
+    },
+});
+
+export const { toggleTodo } = todoSlice.actions;
 export default todoSlice.reducer;

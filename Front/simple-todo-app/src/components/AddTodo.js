@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { TextField, PrimaryButton } from '@fluentui/react';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../features/todoSlice'; 
-import '../App.css'; 
+import { addTodoAsync } from '../features/todoSlice'; 
+import '../App.css';
 
 const AddTodo = () => {
     const [inputValue, setInputValue] = useState('');
     const dispatch = useDispatch();
-
+    
     const handleAddTodo = () => {
         if (inputValue) {
-            dispatch(addTodo(inputValue));
+            dispatch(addTodoAsync(inputValue)); 
             setInputValue('');
         }
     };

@@ -1,42 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, PrimaryButton, DetailsList, DetailsListLayoutMode } from '@fluentui/react';
-import { deleteTodo } from './features/todoSlice'; 
-import AddTodo from './components/AddTodo'; 
-import './App.css'; 
+import { deleteTodoAsync, fetchTodos } from './features/todoSlice'; 
+import AddTodo from './components/AddTodo';
+import './App.css';
 
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredTodos, setFilteredTodos] = useState([]);
     const todos = useSelector((state) => state.todos);
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(fetchTodos());
+    }, [dispatch]);
 
     useEffect(() => {
         if (searchTerm) {
             const results = todos.filter(todo =>
-                todo.text.toLowerCase().includes(searchTerm.toLowerCase())
+                todo.title.toLowerCase().includes(searchTerm.toLowerCase()) 
             );
             setFilteredTodos(results);
         } else {
             setFilteredTodos(todos);
         }
     }, [todos, searchTerm]);
-
-    const handleDeleteTodo = (index) => {
-        dispatch(deleteTodo(index));
+    
+    const handleDeleteTodo = (id) => {
+        dispatch(deleteTodoAsync(id));
     };
 
     const columns = [
         {
             key: 'column1',
             name: 'Task',
-            fieldName: 'text',
+            fieldName: 'title', 
             minWidth: 200,
             maxWidth: 300,
             isMultiline: true,
             onRender: (item) => (
                 <span>
-                    {item.text}
+                    {item.title} 
                 </span>
             ),
         },
@@ -46,8 +50,8 @@ const App = () => {
             fieldName: 'actions',
             minWidth: 100,
             maxWidth: 100,
-            onRender: (item, index) => (
-                <PrimaryButton onClick={() => handleDeleteTodo(index)}>Delete</PrimaryButton>
+            onRender: (item) => (
+                <PrimaryButton onClick={() => handleDeleteTodo(item.id)}>Delete</PrimaryButton> // Updated: Use 'item.id'
             ),
         },
     ];
