@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fluentui/font-icons-mdl2": "^8.5.60",
     "@fluentui/react": "^8.122.15",
     "@reduxjs/toolkit": "^2.7.0",
     "@testing-library/dom": "^10.4.0",
