@@ -6,10 +6,10 @@ const API_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 // Sample deadlines for demonstration purposes
 const sampleDeadlines = [
-    '2023-10-01T12:00', // Example deadline for the first todo
-    '2023-10-02T15:30', // Example deadline for the second todo
-    '2023-10-03T09:00', // Example deadline for the third todo
-    '2023-10-04T18:00', // Example deadline for the fourth todo
+    '2023-10-01', // Example deadline for the first todo
+    '2023-10-02', // Example deadline for the second todo
+    '2023-10-03', // Example deadline for the third todo
+    '2023-10-04', // Example deadline for the fourth todo
 ];
 
 const initialState = [];
