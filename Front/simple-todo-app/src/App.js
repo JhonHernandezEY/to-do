@@ -7,6 +7,8 @@ import './App.css';
 
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [filteredTodos, setFilteredTodos] = useState([]);
     const todos = useSelector((state) => state.todos);
     const dispatch = useDispatch();
@@ -16,15 +18,14 @@ const App = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (searchTerm) {
-            const results = todos.filter(todo =>
-                todo.title.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setFilteredTodos(results);
-        } else {
-            setFilteredTodos(todos);
-        }
-    }, [todos, searchTerm]);
+        const results = todos.filter(todo => {
+            const matchesName = todo.title.toLowerCase().includes(searchTerm.toLowerCase());
+            const matchesStartDate = startDate ? new Date(todo.deadline) >= new Date(startDate) : true; // Check if deadline is after or on start date
+            const matchesEndDate = endDate ? new Date(todo.deadline) <= new Date(endDate) : true; // Check if deadline is before or on end date
+            return matchesName && matchesStartDate && matchesEndDate; // All conditions must be true
+        });
+        setFilteredTodos(results);
+    }, [todos, searchTerm, startDate, endDate]);
 
     const handleDeleteTodo = (id) => {
         dispatch(deleteTodoAsync(id));
@@ -52,7 +53,7 @@ const App = () => {
             maxWidth: 200,
             onRender: (item) => (
                 <span>
-                    {item.deadline.replace('T', ' ')} {/* Replace default 'T' with a space */}
+                    {item.deadline}
                 </span>
             ),
         },
@@ -76,10 +77,24 @@ const App = () => {
                 <TextField
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search tasks"
+                    placeholder="Search tasks by name"
                     className="search-input"
                 />
-                <PrimaryButton onClick={() => setSearchTerm(searchTerm)}>Search</PrimaryButton>
+                <TextField
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    placeholder="Start Date"
+                    className="search-input"
+                />
+                <TextField
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    placeholder="End Date"
+                    className="search-input"
+                />
+                <PrimaryButton onClick={() => {}}>Search</PrimaryButton>
             </div>
             <DetailsList
                 items={filteredTodos}
