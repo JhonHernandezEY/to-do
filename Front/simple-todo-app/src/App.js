@@ -4,6 +4,7 @@ import { TextField, PrimaryButton, DetailsList, DetailsListLayoutMode } from '@f
 import { deleteTodoAsync, fetchTodos } from './features/todoSlice';
 import AddTodo from './components/AddTodo';
 import './App.css';
+import Register from './components/Register';
 
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -71,6 +72,9 @@ const App = () => {
 
     return (
         <div style={{ padding: '20px' }}>
+            <div>
+                <Register />
+            </div>
             {/* Card for the Title */}
             <div className="card" style={{ padding: '20px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '8px', textAlign: 'center' }}>
                 <h1 style={{ color: 'blue' }}>Simple To-Do App</h1>
