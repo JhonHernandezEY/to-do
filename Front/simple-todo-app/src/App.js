@@ -20,9 +20,9 @@ const App = () => {
     useEffect(() => {
         const results = todos.filter(todo => {
             const matchesName = todo.title.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesStartDate = startDate ? new Date(todo.deadline) >= new Date(startDate) : true; 
-            const matchesEndDate = endDate ? new Date(todo.deadline) <= new Date(endDate) : true; 
-            return matchesName && matchesStartDate && matchesEndDate; 
+            const matchesStartDate = startDate ? new Date(todo.deadline) >= new Date(startDate) : true;
+            const matchesEndDate = endDate ? new Date(todo.deadline) <= new Date(endDate) : true;
+            return matchesName && matchesStartDate && matchesEndDate;
         });
         setFilteredTodos(results);
     }, [todos, searchTerm, startDate, endDate]);
@@ -71,31 +71,44 @@ const App = () => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <h1>Simple To-Do App</h1>
-            <AddTodo />
-            <div className="search-container">
-                <TextField
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search tasks by name"
-                    className="search-input"
-                />
-                <TextField
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    placeholder="Start Date"
-                    className="search-input"
-                />
-                <TextField
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    placeholder="End Date"
-                    className="search-input"
-                />
-                <PrimaryButton onClick={() => {}}>Search</PrimaryButton>
+            {/* Card for the Title */}
+            <div className="card" style={{ padding: '20px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '8px', textAlign: 'center' }}>
+                <h1 style={{ color: 'blue' }}>Simple To-Do App</h1>
             </div>
+
+            {/* Card for AddTodo */}
+            <div className="card" style={{ padding: '20px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+                <AddTodo />
+            </div>
+
+            {/* Card for Search Container */}
+            <div className="card" style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+                <div className="search-container">
+                    <TextField
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder="Search tasks by name"
+                        className="search-input"
+                    />
+                    <TextField
+                        type="date"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        placeholder="Start Date"
+                        className="search-input"
+                    />
+                    <TextField
+                        type="date"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        placeholder="End Date"
+                        className="search-input"
+                    />
+                    <PrimaryButton onClick={() => {}}>Search</PrimaryButton>
+                </div>
+            </div>
+
+            {/* Details List for Filtered Todos */}
             <DetailsList
                 items={filteredTodos}
                 columns={columns}
