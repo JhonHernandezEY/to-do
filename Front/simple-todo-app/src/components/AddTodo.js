@@ -49,6 +49,7 @@ const AddTodo = () => {
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Add a new task"
                 className="add-todo-input"
+                errorMessage={!inputValue ? 'Please enter a task.' : ''}
             />
             <TextField
                 type="date"
@@ -56,6 +57,7 @@ const AddTodo = () => {
                 onChange={(e) => setDeadline(e.target.value)}
                 placeholder="Select a deadline"
                 className="add-todo-input"
+                errorMessage={!deadline ? 'Please select a deadline.' : ''}
             />
             <PrimaryButton onClick={handleAddTodo}>Add</PrimaryButton>
 

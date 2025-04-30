@@ -20,9 +20,9 @@ const App = () => {
     useEffect(() => {
         const results = todos.filter(todo => {
             const matchesName = todo.title.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesStartDate = startDate ? new Date(todo.deadline) >= new Date(startDate) : true; // Check if deadline is after or on start date
-            const matchesEndDate = endDate ? new Date(todo.deadline) <= new Date(endDate) : true; // Check if deadline is before or on end date
-            return matchesName && matchesStartDate && matchesEndDate; // All conditions must be true
+            const matchesStartDate = startDate ? new Date(todo.deadline) >= new Date(startDate) : true; 
+            const matchesEndDate = endDate ? new Date(todo.deadline) <= new Date(endDate) : true; 
+            return matchesName && matchesStartDate && matchesEndDate; 
         });
         setFilteredTodos(results);
     }, [todos, searchTerm, startDate, endDate]);
