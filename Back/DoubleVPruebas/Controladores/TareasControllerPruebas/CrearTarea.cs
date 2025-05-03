@@ -7,7 +7,7 @@ using Moq;
 using Xunit;
 using System.Threading.Tasks;
 using DoubleV.Controllers;
-using DoubleV.Modelos;
+using DoubleV.Models;
 using DoubleV.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using DoubleV.Interfaces;
@@ -17,12 +17,12 @@ namespace DoubleVPruebas.Controladores.TareasControllerPruebas
 {
     public class CrearTarea
     {
-        private readonly Mock<ITareaService> _mockTareaService;
-        private readonly TareasController _tareasController;
+        private readonly Mock<ITodoService> _mockTareaService;
+        private readonly TodosController _tareasController;
 
         public CrearTarea()
         {
-            _mockTareaService = new Mock<ITareaService>();
+            _mockTareaService = new Mock<ITodoService>();
             //_tareasController = new TareasController(_mockTareaService.Object);
         }
 

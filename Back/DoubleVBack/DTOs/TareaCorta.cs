@@ -1,7 +1,7 @@
 ﻿namespace DoubleV.DTOs
 {
-    public class TareaCorta
+    public class ShortTodo
     {
-        public string? Descripcion { get; set; }        
+        public string? Name { get; set; }        
     }
 }

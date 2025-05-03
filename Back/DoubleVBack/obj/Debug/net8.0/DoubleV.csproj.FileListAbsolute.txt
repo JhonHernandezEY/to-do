@@ -1,0 +1,8 @@
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.csproj.AssemblyReference.cache
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.AssemblyInfoInputs.cache
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.AssemblyInfo.cs
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.csproj.CoreCompileInputs.cache
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\AM187SG\OneDrive - EY\Documents\to-do\Back\DoubleVBack\obj\Debug\net8.0\DoubleV.sourcelink.json

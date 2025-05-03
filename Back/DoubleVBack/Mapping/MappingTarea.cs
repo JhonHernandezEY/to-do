@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DoubleV.DTOs;
 using DoubleV;
-using DoubleV.Modelos;
+using DoubleV.Models;
 
 namespace DoubleV.Mapping
 {
@@ -9,15 +9,14 @@ namespace DoubleV.Mapping
     {
         public MappingTarea()
         {
-            CreateMap<TareaSinIdDTO, Tarea>()
-                .ForMember(dest => dest.Usuario, opt => opt.Ignore());
+            CreateMap<TodoWithoutIdDTO, Todo>()
+                .ForMember<User>(dest => dest.User, opt => opt.Ignore());
 
-            CreateMap<Tarea, TareaSinIdDTO>();
+            CreateMap<Todo, TodoWithoutIdDTO>();
 
-            CreateMap<TareaActualizarDTO, Tarea>()
-            .ForMember(dest => dest.TareaId, opt => opt.Ignore()) // Ignorar TareaId para no cambiar el ID
-            .ForMember(dest => dest.Usuario, opt => opt.Ignore());
-          
+            //CreateMap<TodoUpdateDTO, Todo>()
+            //.ForMember(dest => dest.TodoId, opt => opt.Ignore()) // Ignore TodoId to not changing the Id
+            //.ForMember<User>(dest => dest.User, opt => opt.Ignore());          
         }        
     }
 }

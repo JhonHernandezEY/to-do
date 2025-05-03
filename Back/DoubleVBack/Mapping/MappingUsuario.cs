@@ -1,5 +1,5 @@
 ﻿using DoubleV.DTOs;
-using DoubleV.Modelos;
+using DoubleV.Models;
 
 namespace DoubleV.Mapping
 {
@@ -7,17 +7,17 @@ namespace DoubleV.Mapping
     {
         public MappingUsuario()
         {
-            CreateMap<Usuario, UsuarioSinIdDTO>()
-             .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+            CreateMap<User, UserWithoutIdDTO>()
+             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
              .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
              .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
              .ForMember(dest => dest.RolId, opt => opt.MapFrom(src => src.RolId))
              .ReverseMap();
 
-            CreateMap<LoginDTO, Usuario>()
-            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Correo))
+            CreateMap<LoginDTO, User>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
-            .ForMember(dest => dest.Nombre, opt => opt.Ignore()) 
+            .ForMember(dest => dest.Name, opt => opt.Ignore()) 
             .ForMember(dest => dest.RolId, opt => opt.Ignore());
         }
     }

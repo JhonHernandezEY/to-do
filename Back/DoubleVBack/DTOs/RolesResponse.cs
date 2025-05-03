@@ -1,10 +1,10 @@
-﻿using DoubleV.Modelos;
+﻿using DoubleV.Models;
 
 namespace DoubleV.DTOs
 {
     public class RolesResponse
     {
-        public string Message { get; set; }
-        public List<Rol> Roles { get; set; }
+        public required string Message { get; set; }
+        public List<Role>? Roles { get; set; }
     }
 }

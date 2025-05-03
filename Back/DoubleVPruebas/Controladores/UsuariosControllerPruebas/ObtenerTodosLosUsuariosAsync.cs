@@ -7,7 +7,7 @@ using Moq;
 using Xunit;
 using System.Threading.Tasks;
 using DoubleV.Controllers;
-using DoubleV.Modelos;
+using DoubleV.Models;
 using DoubleV.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using DoubleV.Interfaces;
@@ -17,8 +17,8 @@ namespace DoubleVPruebas.Controladores.UsuariosControllerPruebas
 {
     public class ObtenerTodosLosUsuariosAsync
     {
-        private readonly Mock<IUsuarioService> _mockUsuarioService;
-        private readonly UsuariosController _usuariosController;
+        private readonly Mock<IUserService> _mockUsuarioService;
+        private readonly UsersController _usuariosController;
 
         //public ObtenerTodosLosUsuariosAsync()
         //{

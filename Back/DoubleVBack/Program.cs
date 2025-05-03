@@ -1,7 +1,7 @@
 using DoubleV;
 using DoubleV.Interfaces;
 using DoubleV.Mapping;
-using DoubleV.Modelos;
+using DoubleV.Models;
 using DoubleV.Servicios;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -37,9 +37,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ServiceLifetime.Transient
 );
 
-builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<ITareaService, TareaService>();
-builder.Services.AddScoped<IRolService, RolService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITodoService, TodoService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 
 builder.Services.AddSwaggerGen(c =>
 {
